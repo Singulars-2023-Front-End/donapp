@@ -1,8 +1,8 @@
 export const Footer = () => (
-  <footer className="footer mt-auto py-3 text-center">
+  <footer>
     <p>
-      Made with <i className="fa fa-heart text-danger" /> by{" "}
-      <a href="http://www.4geeksacademy.com">4Geeks Academy</a>
+      Made By Singulars 2023 - <a href="https://github.com/Singulars-2023-Front-End/donapp">GitHub</a>
     </p>
   </footer>
 );
+
