@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Context } from "../store/appContext";
 import { useParams } from "react-router-dom";
 import { Icon } from "@iconify/react";
+import { Link } from "react-router-dom";
 
 const DetailView = () => {
   const { store, actions } = useContext(Context);
@@ -12,6 +13,7 @@ const DetailView = () => {
 
   return (
     <div className=" container grid p-1 md:place-content-center">
+      <Link to="/"><Icon icon="carbon:previous-outline" width="30px" /></Link>
       <div className="product-card h-full bg-secondary md:max-w-[500px]  flow p-5 rounded-lg">
         <div className="header flex justify-between place-items-center">
           <div className="profile flex place-items-center gap-2">

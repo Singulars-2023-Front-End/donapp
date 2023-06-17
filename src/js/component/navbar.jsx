@@ -13,6 +13,7 @@ export const Navbar = () => {
       <Link to="/newdonation">
         New Donation
       </Link>
+      <Link to="/signUp">Sign-Up</Link>
     </nav>
   );
 };
