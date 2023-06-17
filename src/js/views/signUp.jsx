@@ -1,12 +1,14 @@
 import { useContext } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
+import { Icon } from "@iconify/react";
 import { ToastContainer, toast } from "react-toastify";
 
 export const SignUp = () => {
   const { store, actions } = useContext(Context);
-
+  const [showPassword, setShowPassword]=useState(false)
   const {
     register,
     handleSubmit,
@@ -16,21 +18,21 @@ export const SignUp = () => {
 
   function getInvalidPasswordError(password) {
     if (!/(?=.*[a-z])/.test(password)) {
-      return "Password should contain at least one lowercase letter.";
+      return "La contraseña debe contener al menos una letra minúscula.";
     }
     if (!/(?=.*[A-Z])/.test(password)) {
-      return "Password should contain at least one uppercase letter.";
+      return "La contraseña debe contener al menos una letra mayúscula.";
     }
     if (!/(?=.*\d)/.test(password)) {
-      return "Password should contain at least one digit.";
+      return "La contraseña debe contener al menos un dígito.";
     }
     if (!/(?=.*[@$!%*?&])/.test(password)) {
-      return "Password should contain at least one special character.";
+      return "La contraseña debe contener al menos un carácter especial.";
     }
     if (password.length < 8) {
-      return "Password should have a minimum length of 8 characters.";
+      return "La contraseña debe tener al menos de 8 caracteres.";
     }
-    return null; // If no error is found, return null
+    return null; 
   }
   const onSubmit = (data) => {
     console.log("Data", data);
@@ -39,8 +41,8 @@ export const SignUp = () => {
   };
 
   return (
-    <div className="flex flex-col gap-3 justify-center items-center bg-secondary">
-      <h1 className="text-2xl font-bold">Join our caring community</h1>
+    <div className=" flex flex-col gap-3 justify-center items-center bg-secondary mx-2.5 rounded-lg">
+      <h1 className="text-xl font-bold">únete a nuestra comunidad solidaria</h1>
       <form
         className="flex flex-col md:w-[50vw] w-full border p-6 gap-4 rounded"
         onSubmit={handleSubmit(onSubmit)}
@@ -55,7 +57,7 @@ export const SignUp = () => {
             placeholder="Nombre"
             {...register(
               "name",
-              //{ pattern: /^[A-Za-z-0-9]/i },
+              
               //This is the validation
               {
                 required: "Campo requerido.",
@@ -70,10 +72,10 @@ export const SignUp = () => {
             <span className="text-error">{errors.name.message}</span>
           )}
 
-          {/* **********Cidudad********* */}
+          {/* **********City********* */}
           <label className="label-text">Ciudad</label>
           <input
-            className={`input input-md input-bordered  ${
+            className={`input input-md input-bordered   ${
               errors.city ? "input-error" : ""
             }`}
             placeholder="Cidudad"
@@ -82,10 +84,10 @@ export const SignUp = () => {
             })}
           />
           {errors.city && (
-            <span className="text-error">Por favor, ingresa tu ciudad</span>
+            <span className="text-error">Por favor, introduzca tu ciudad</span>
           )}
 
-          {/* **********Email*************** */}
+          {/* ******************Email*************** */}
           <label className="label-text">Email</label>
           <input
             className={`input input-md input-bordered  ${
@@ -100,12 +102,14 @@ export const SignUp = () => {
           />
           {errors.email?.type == "pattern" && (
             <span className="text-error">
-              Por favor, ingresa un correo electrónico válido
+              Por favor, introduzca un correo electrónico válido
             </span>
           )}
-          {/* {*******password******} */}
-          <label className="label-text">Contraseña</label>
-          <input
+          {/* {*********************password************************} */}
+                  <label className="label-text">Contraseña</label>
+                  <div className="flex flex-col relative">
+                  <input
+                      type={showPassword? "text":"password"}
             className={`input input-md input-bordered  ${
               errors.password ? "input-error" : ""
             }`}
@@ -114,18 +118,29 @@ export const SignUp = () => {
               required: true,
               validate: getInvalidPasswordError,
             })}
-          />
-          {errors.password?.type == "validate" && (
-            <span className="text-error">{errors.password.message}</span>
-          )}
+                      
+                      />
+                      {/* ********************showing password with eye icon not****************** */}
+                  <button className=" absolute top-3 right-5 cursor-pointer" onClick={() => setShowPassword(!showPassword)}>{showPassword?(<Icon width={20} icon="iconamoon:eye-light" />): (
+                <Icon width={20} icon="iconoir:eye-close" />
+                      )}</button>
+                      </div>
+                  <p></p>
+             {errors.password?.type == "validate" && (
+             <span className="text-error">{errors.password.message}</span>
+                  )}
+                  
         </div>
+        {/* *************************submit button******************* */}
         <input
           className="btn bg-primary text-white rounded w-fit place-self-center uppercase"
           type="submit"
-          value="Publicar"
+          value="Registrar"
         />
         <ToastContainer></ToastContainer>
-      </form>
+          </form>
+          <p>¿Ya tienes una cuenta?
+          Inicia sesión</p>
     </div>
   );
 };

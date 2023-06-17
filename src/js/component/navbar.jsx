@@ -13,7 +13,9 @@ export const Navbar = () => {
       <Link to="/newdonation">
         New Donation
       </Link>
-      <Link to="/signUp">Sign-Up</Link>
+      <Link to="/signUp">
+        <span className="btn btn-active btn-secondary">Registrate</span>
+      </Link>
     </nav>
   );
 };
